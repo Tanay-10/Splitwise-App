@@ -47,18 +47,18 @@ class HomeScreen extends StatelessWidget {
             label: "Groups",
           ),
           BottomNavigationBarItem(
-            // activeIcon: CupertinoButton(
-            //   child: Text(""),
-            //   onPressed: () {
-            //     Navigator.of(context).push(
-            //       CupertinoPageRoute(
-            //         builder: (context) {
-            //           return FriendsScreen();
-            //         },
-            //       ),
-            //     );
-            //   },
-            // ),
+            activeIcon: CupertinoButton(
+              child: Text(""),
+              onPressed: () {
+                Navigator.of(context).push(
+                  CupertinoPageRoute(
+                    builder: (context) {
+                      return FriendsScreen();
+                    },
+                  ),
+                );
+              },
+            ),
             icon: Icon(Icons.person),
             label: "Friends",
           ),
@@ -76,31 +76,31 @@ class HomeScreen extends StatelessWidget {
         return CupertinoTabView(
           builder: (context) {
             return CupertinoPageScaffold(
-              // navigationBar: CupertinoNavigationBar(
-              //   leading: Column(
-              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //     children: [
-              //       Text(
-              //         navTabs[i],
-              //         style: TextStyle(
-              //             fontSize: 22, color: CupertinoColors.activeBlue),
-              //       ),
-              //     ],
-              //   ),
-              //   trailing: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: [
-              //       Icon(CupertinoIcons.search),
-              //       SizedBox(
-              //         width: 20,
-              //       ),
-              //       Icon(Icons.group_add_sharp),
-              //       SizedBox(
-              //         width: 20,
-              //       ),
-              //     ],
-              //   ),
-              // ),
+              navigationBar: CupertinoNavigationBar(
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      navTabs[i],
+                      style: TextStyle(
+                          fontSize: 22, color: CupertinoColors.activeBlue),
+                    ),
+                  ],
+                ),
+                trailing: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(CupertinoIcons.search),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Icon(Icons.group_add_sharp),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+              ),
               child: Center(
                 child: Text(
                   "Hello",
