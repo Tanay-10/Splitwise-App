@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'screens/routing.dart';
+import 'screens/Groups.dart';
+import 'screens/Account.dart';
+import 'screens/Activity.dart';
+import 'screens/Friends.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,133 +17,45 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      theme: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(
-          navTitleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 50,
-            color: CupertinoColors.activeBlue,
-          ),
-        ),
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: FriendsTab(),
+      onGenerateRoute: Router.generateRoute,
+      initialRoute: friendsTabId,
     );
   }
 }
 
-List<String> navTabs = [
-  "Groups",
-  "Friends",
-  "Activity",
-  "Account",
-];
+// List<String> navItems = [
+//   "Groups",
+//   "Friends",
+//   "Activity",
+//   "Account",
+// ];
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: [
-          BottomNavigationBarItem(
-            // activeIcon: CupertinoNavigationBar(),
-            icon: Icon(CupertinoIcons.group_solid),
-            label: "Groups",
-          ),
-          BottomNavigationBarItem(
-            activeIcon: CupertinoButton(
-              child: Text(""),
-              onPressed: () {
-                Navigator.of(context).push(
-                  CupertinoPageRoute(
-                    builder: (context) {
-                      return FriendsScreen();
-                    },
-                  ),
-                );
-              },
+class Router {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case friendsTabId:
+        return MaterialPageRoute(builder: (context) => FriendsTab());
+      case groupsTabId:
+        return MaterialPageRoute(builder: (context) => GroupsTab());
+      // case '/groups' :
+      //   return MaterialPageRoute(builder: (_) => GroupsTab());
+      case activityTabId:
+        return MaterialPageRoute(builder: (context) => ActivityTab());
+      case accountTabId:
+        return MaterialPageRoute(builder: (context) => AccountTab());
+      default:
+        return MaterialPageRoute(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
             ),
-            icon: Icon(Icons.person),
-            label: "Friends",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.speaker_notes),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            // icon: FaIcon(FontAwesomeIcons.solidArrowAltCircleUp),
-            icon: Icon(CupertinoIcons.money_dollar),
-            label: "Account",
-          ),
-        ],
-      ),
-      tabBuilder: (context, i) {
-        return CupertinoTabView(
-          builder: (context) {
-            return CupertinoPageScaffold(
-              navigationBar: CupertinoNavigationBar(
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      navTabs[i],
-                      style: TextStyle(
-                          fontSize: 22, color: CupertinoColors.activeBlue),
-                    ),
-                  ],
-                ),
-                trailing: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(CupertinoIcons.search),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Icon(Icons.group_add_sharp),
-                    SizedBox(
-                      width: 20,
-                    ),
-                  ],
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Hello",
-                  style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
-                ),
-              ),
-            );
-          },
         );
-      },
-    );
-  }
-}
-
-class FriendsScreen extends StatelessWidget {
-  const FriendsScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Icon(CupertinoIcons.search),
-            SizedBox(
-              width: 20,
-            ),
-            Icon(Icons.person_add),
-            SizedBox(
-              width: 20,
-            ),
-          ],
-        ),
-      ),
-      child: Text(""),
-    );
+    }
   }
 }
