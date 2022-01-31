@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'routing.dart';
-import 'Groups.dart';
 import 'Account.dart';
 import 'Activity.dart';
 
@@ -21,7 +20,7 @@ class FriendsTab extends StatefulWidget {
 }
 
 class _FriendsTabState extends State<FriendsTab> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   NavTabs currentTab = NavTabs.friends;
 
   void _selectTab(int index) {
@@ -30,17 +29,15 @@ class _FriendsTabState extends State<FriendsTab> {
     });
     // print(tabId[index]);
     switch (index) {
-      case 0:
-        Navigator.pushNamed(context, groupsTabId);
-        break;
-      case 2:
+      case 1:
         Navigator.pushNamed(context, activityTabId);
         break;
-      case 3:
+      case 2:
         Navigator.pushNamed(context, accountTabId);
         break;
       default:
         Navigator.pushNamed(context, friendsTabId);
+        break;
     }
   }
 
@@ -100,11 +97,6 @@ class _FriendsTabState extends State<FriendsTab> {
             ),
             onTap: _selectTab,
             items: [
-              BottomNavigationBarItem(
-                // backgroundColor: CupertinoColors.activeBlue,
-                label: "Groups",
-                icon: Icon(CupertinoIcons.group_solid),
-              ),
               BottomNavigationBarItem(
                 // backgroundColor: CupertinoColors.activeBlue,
                 label: "Friends",
