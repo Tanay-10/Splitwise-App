@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:split_wise/routing.dart' as routing;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddExpense extends StatelessWidget {
+class AddExpense extends StatefulWidget {
   const AddExpense({Key? key}) : super(key: key);
+
+  @override
+  _AddExpenseState createState() => _AddExpenseState();
+}
+
+class _AddExpenseState extends State<AddExpense> {
+  bool _isSelected1 = false;
+  bool _isSelected2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +32,12 @@ class AddExpense extends StatelessWidget {
         backgroundColor: Colors.white70,
         actions: [
           IconButton(
+            tooltip: "Save",
             color: CupertinoColors.activeGreen,
             splashRadius: 20,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             iconSize: 35,
             icon: Icon(Icons.check),
           ),
@@ -151,7 +162,9 @@ class AddExpense extends StatelessWidget {
                           Radius.circular(5),
                         ),
                         borderSide: BorderSide(
-                          color: CupertinoColors.activeGreen,
+                          color: _isSelected1
+                              ? CupertinoColors.activeGreen
+                              : CupertinoColors.inactiveGray.withOpacity(0.4),
                           width: 2,
                         ),
                       ),
@@ -164,6 +177,11 @@ class AddExpense extends StatelessWidget {
                         color: Colors.black87.withOpacity(0.7),
                       ),
                     ),
+                    onTap: () {
+                      _isSelected1 = true;
+                      _isSelected2 = false;
+                      setState(() {});
+                    },
                   ),
                 )
               ],
@@ -221,7 +239,9 @@ class AddExpense extends StatelessWidget {
                           Radius.circular(5),
                         ),
                         borderSide: BorderSide(
-                          color: CupertinoColors.activeGreen,
+                          color: _isSelected2
+                              ? CupertinoColors.activeGreen
+                              : CupertinoColors.inactiveGray.withOpacity(0.4),
                           width: 2,
                         ),
                       ),
@@ -235,6 +255,11 @@ class AddExpense extends StatelessWidget {
                         ),
                       ),
                     ),
+                    onTap: () {
+                      _isSelected2 = true;
+                      _isSelected1 = false;
+                      setState(() {});
+                    },
                   ),
                 )
               ],
@@ -244,6 +269,7 @@ class AddExpense extends StatelessWidget {
             height: 20,
           ),
           Container(
+            height: 40,
             width: MediaQuery.of(context).size.width * 3 / 5,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
