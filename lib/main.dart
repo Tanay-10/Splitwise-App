@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:app_example/floatingAction.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'navTabs/routing.dart' as routing;
+import 'package:split_wise/screens/split.dart';
+import 'routing.dart' as routing;
 import 'navTabs/Friends.dart';
 import 'navTabs/Account.dart';
 import 'navTabs/Activity.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: const FriendsTab(),
       routes: {
         routing.expenseScreenId: (context) => AddExpense(),
+        routing.expenseSplitId: (context) => ExpenseSplit(),
       },
       // home: MyHomePage(),
       // onGenerateRoute: Router.generateRoute,
