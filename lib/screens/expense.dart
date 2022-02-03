@@ -77,7 +77,7 @@ class _AddExpenseState extends State<AddExpense> {
                         child: Card(
                           child: Center(
                             child: Text(
-                              "Kunal",
+                              "ABC",
                               style: TextStyle(
                                 fontSize: 22,
                                 color: Colors.black87.withOpacity(0.8),
