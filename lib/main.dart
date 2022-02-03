@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:app_example/floatingAction.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:split_wise/screens/settle_up.dart';
 import 'package:split_wise/screens/split.dart';
 import 'routing.dart' as routing;
 import 'navTabs/Friends.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         routing.expenseScreenId: (context) => AddExpense(),
         routing.expenseSplitId: (context) => ExpenseSplit(),
+        routing.settleUpId: (context) => SettleUp(),
       },
       // home: MyHomePage(),
       // onGenerateRoute: Router.generateRoute,
