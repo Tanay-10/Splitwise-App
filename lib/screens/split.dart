@@ -45,7 +45,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
