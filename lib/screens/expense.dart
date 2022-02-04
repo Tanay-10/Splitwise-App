@@ -77,10 +77,11 @@ class _AddExpenseState extends State<AddExpense> {
                         child: Card(
                           child: Center(
                             child: Text(
-                              "ABC",
+                              " ABC",
                               style: TextStyle(
                                 fontSize: 22,
-                                color: Colors.black87.withOpacity(0.8),
+                                color: Colors.black54.withOpacity(0.8),
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -95,11 +96,13 @@ class _AddExpenseState extends State<AddExpense> {
                         ),
                       ),
                       Positioned(
-                        left: -15,
-                        child: Icon(
-                          CupertinoIcons.profile_circled,
-                          color: CupertinoColors.activeGreen,
-                          size: 40,
+                        left: -12,
+                        child: CircleAvatar(
+                          radius: 20,
+                          // backgroundImage: AssetImage("lib/assets/arg.jpg"),
+                          // backgroundColor: Colors.teal.shade500,
+                          backgroundColor:
+                              CupertinoColors.activeBlue.withOpacity(0.9),
                         ),
                       ),
                     ],
