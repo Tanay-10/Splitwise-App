@@ -54,10 +54,16 @@ class Accounts extends StatelessWidget {
                     CircleAvatar(
                       radius: 30,
                       // backgroundImage: AssetImage("lib/assets/arg.jpg"),
-                      backgroundColor: Colors.teal.shade500,
+                      // backgroundColor: Colors.teal.shade500,
+                      backgroundColor:
+                          CupertinoColors.activeBlue.withOpacity(0.75),
                       child: const Text(
                         "TA",
-                        style: TextStyle(fontSize: 24),
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(
