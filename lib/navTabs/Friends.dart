@@ -109,96 +109,77 @@ class _FriendsTabState extends State<FriendsTab> {
         onTap: selectTab,
         items: /*const <BottomNavigationBarItem>*/ [
           BottomNavigationBarItem(
-            activeIcon: Container(
-              // padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-              width: 120,
-              // color: Colors.grey.shade300,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: Colors.white70,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(CupertinoIcons.person),
-                    Text(
-                      "Friends",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            activeIcon: NavBarItem(
+              itemText: "Friends",
+              activeIcon: CupertinoIcons.person,
             ),
             icon: Icon(CupertinoIcons.person),
             label: "Friends",
           ),
           BottomNavigationBarItem(
-            activeIcon: Container(
-              // padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-              width: 120,
-              // color: Colors.grey.shade300,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: Colors.white70,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(CupertinoIcons.book),
-                    Text(
-                      "Activity",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            activeIcon: NavBarItem(
+              itemText: "Activity",
+              activeIcon: CupertinoIcons.book,
             ),
             icon: Icon(CupertinoIcons.book),
             label: "Activity",
           ),
           BottomNavigationBarItem(
-            activeIcon: Container(
-              // padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-              width: 120,
-              // color: Colors.grey.shade300,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: Colors.white70,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(CupertinoIcons.money_dollar),
-                    Text(
-                      "Account",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            activeIcon: NavBarItem(
+              itemText: "Activity",
+              activeIcon: CupertinoIcons.money_dollar,
             ),
             icon: Icon(CupertinoIcons.money_dollar),
             label: "Account",
           ),
         ],
+      ),
+    );
+  }
+}
+
+class NavBarItem extends StatelessWidget {
+  final String itemText;
+  final IconData activeIcon;
+
+  const NavBarItem({
+    required this.itemText,
+    required this.activeIcon,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+      width: 120,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            width: 2,
+            color: CupertinoColors.activeGreen,
+          ),
+          borderRadius: BorderRadius.circular(7),
+        ),
+        // color: Colors.lightBlue.withOpacity(0.1),
+        child: Container(
+          padding: EdgeInsets.all(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(activeIcon),
+              Text(
+                itemText,
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -233,9 +214,9 @@ class ExpenseTrack extends StatelessWidget {
                 Text(
                   "owes you",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: CupertinoColors.activeOrange,
+                    color: CupertinoColors.activeBlue.withOpacity(0.7),
                   ),
                 ),
                 Text(
@@ -243,7 +224,7 @@ class ExpenseTrack extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: CupertinoColors.activeOrange,
+                    color: CupertinoColors.activeBlue.withOpacity(0.7),
                   ),
                 ),
               ],
