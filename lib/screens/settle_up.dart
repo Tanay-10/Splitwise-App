@@ -12,7 +12,7 @@ class SettleUp extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingAction(),
       appBar: AppBar(
-        backgroundColor: CupertinoColors.activeGreen,
+        backgroundColor: CupertinoColors.activeGreen.withOpacity(0.9),
         actions: [
           IconButton(
             splashRadius: 25,
@@ -66,8 +66,9 @@ class SettleUp extends StatelessWidget {
                           Text(
                             "\u{20B9}1000.00",
                             style: TextStyle(
-                              fontSize: 16,
-                              color: CupertinoColors.activeOrange,
+                              fontSize: 17,
+                              color:
+                                  CupertinoColors.activeBlue.withOpacity(0.8),
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -86,12 +87,14 @@ class SettleUp extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.orangeAccent[700],
+                    primary: CupertinoColors.activeBlue.withOpacity(0.74),
                     elevation: 7,
                     // side: BorderSide(width: 3, color: Colors.white),
                     minimumSize: Size(55, 40),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, routing.recordPaymentId);
+                  },
                   child: Text(
                     "Settle up",
                     style: TextStyle(
@@ -175,7 +178,7 @@ class SettleUp extends StatelessWidget {
                       Text(
                         "Medicine",
                         style: TextStyle(
-                          color: Colors.black87.withOpacity(0.6),
+                          color: Colors.black87.withOpacity(0.7),
                           fontSize: 19,
                           fontWeight: FontWeight.w700,
                         ),
@@ -199,7 +202,7 @@ class SettleUp extends StatelessWidget {
                     Text(
                       "You lent",
                       style: TextStyle(
-                        color: CupertinoColors.activeOrange,
+                        color: CupertinoColors.activeBlue,
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
@@ -207,7 +210,7 @@ class SettleUp extends StatelessWidget {
                     Text(
                       "\u{20B9}2000.00",
                       style: TextStyle(
-                        color: CupertinoColors.activeOrange,
+                        color: CupertinoColors.activeBlue,
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
                       ),
@@ -238,7 +241,7 @@ class SettleUp extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Oct",
+                      "Aug",
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 16,
@@ -246,7 +249,7 @@ class SettleUp extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "27",
+                      "12",
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 18,
