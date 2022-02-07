@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:app_example/floatingAction.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:split_wise/screens/activity_desc.dart';
+import 'package:split_wise/screens/new_contact.dart';
 import 'package:split_wise/screens/record_payment.dart';
 import 'package:split_wise/screens/settle_up.dart';
 import 'package:split_wise/screens/split.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         routing.settleUpId: (context) => SettleUp(),
         routing.recordPaymentId: (context) => RecordPayment(),
         routing.activityDescId: (context) => ActivityDesc(),
+        routing.newContactId: (context) => NewContact(),
       },
       // home: MyHomePage(),
       // onGenerateRoute: Router.generateRoute,
