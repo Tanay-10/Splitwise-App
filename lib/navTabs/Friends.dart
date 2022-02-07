@@ -54,8 +54,10 @@ class _FriendsTabState extends State<FriendsTab> {
                   splashColor: CupertinoColors.systemGrey,
                   color: Colors.black54,
                   iconSize: 30,
-                  onPressed: () {},
                   icon: Icon(Icons.person_add_alt),
+                  onPressed: () {
+                    Navigator.pushNamed(context, routing.newContactId);
+                  },
                 ),
                 SizedBox(
                   width: 10,
