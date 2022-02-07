@@ -172,7 +172,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                       elevation: _isSelected3 == false ? 3 : 10,
                       child: Center(
                         child: Text(
-                          "Kunal paid, split equally",
+                          "ABC paid, split equally",
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 20,
@@ -221,7 +221,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                       elevation: _isSelected4 == false ? 3 : 10,
                       child: Center(
                         child: Text(
-                          "Kunal is owed the full amount",
+                          "ABC is owed the full amount",
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 20,
