@@ -68,44 +68,30 @@ class _AddExpenseState extends State<AddExpense> {
                   SizedBox(
                     width: 15,
                   ),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 1 / 4,
-                        height: 40,
-                        child: Card(
-                          child: Center(
-                            child: Text(
-                              " ABC",
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.black54.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          elevation: 4,
-                          shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: CupertinoColors.white,
-                            ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 1 / 4,
+                    height: 45,
+                    child: Card(
+                      child: Center(
+                        child: Text(
+                          "ABC",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.black54.withOpacity(0.8),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
-                      Positioned(
-                        left: -12,
-                        child: CircleAvatar(
-                          radius: 20,
-                          // backgroundImage: AssetImage("lib/assets/arg.jpg"),
-                          // backgroundColor: Colors.teal.shade500,
-                          backgroundColor:
-                              CupertinoColors.activeBlue.withOpacity(0.9),
+                      elevation: 4,
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: CupertinoColors.activeGreen,
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -282,9 +268,9 @@ class _AddExpenseState extends State<AddExpense> {
               child: Text(
                 "Paid by you and split equally",
                 style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                  color: Colors.black54.withOpacity(0.7),
+                  fontSize: 16.5,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               onPressed: () {
