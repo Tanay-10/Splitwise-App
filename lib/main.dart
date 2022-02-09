@@ -11,7 +11,7 @@ import 'routing.dart' as routing;
 import 'navTabs/Friends.dart';
 import 'navTabs/Account.dart';
 import 'navTabs/Activity.dart';
-import 'screens/expense.dart';
+import 'screens/add_expense.dart';
 
 void main() {
   runApp(const MyApp());
