@@ -25,53 +25,46 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      home: const FriendsTab(),
-      routes: {
-        routing.expenseScreenId: (context) => AddExpense(),
+      initialRoute: routing.friendsTabId,
+      /*routes: {
+        routing.addExpenseScreenId: (context) => AddExpense(),
         routing.expenseSplitId: (context) => ExpenseSplit(),
         routing.settleUpId: (context) => SettleUp(),
         routing.recordPaymentId: (context) => RecordPayment(),
         routing.activityDescId: (context) => ActivityDesc(),
         routing.newContactId: (context) => NewContact(),
+      },*/
+      onGenerateRoute: (settings) {
+        var pageName = settings.name;
+        var args = settings.arguments;
+        if (pageName == routing.friendsTabId) {
+          return MaterialPageRoute(builder: (context) => FriendsTab());
+        }
+        if (pageName == routing.activityTabId) {
+          return MaterialPageRoute(builder: (context) => Activity());
+        }
+        if (pageName == routing.accountTabId) {
+          return MaterialPageRoute(builder: (context) => Accounts());
+        }
+        if (pageName == routing.addExpenseScreenId) {
+          return MaterialPageRoute(builder: (context) => AddExpense());
+        }
+        if (pageName == routing.expenseSplitId) {
+          return MaterialPageRoute(builder: (context) => ExpenseSplit());
+        }
+        if (pageName == routing.settleUpId) {
+          return MaterialPageRoute(builder: (context) => SettleUp());
+        }
+        if (pageName == routing.recordPaymentId) {
+          return MaterialPageRoute(builder: (context) => RecordPayment());
+        }
+        if (pageName == routing.activityDescId) {
+          return MaterialPageRoute(builder: (context) => ActivityDesc());
+        }
+        if (pageName == routing.newContactId) {
+          return MaterialPageRoute(builder: (context) => NewContact());
+        }
       },
-      // home: MyHomePage(),
-      // onGenerateRoute: Router.generateRoute,
-      // initialRoute: friendsTabId,
     );
   }
 }
-
-enum NavTabs {
-  groups,
-  friends,
-  activity,
-  account,
-}
-
-// List<String> navItems = [
-//   "Groups",
-//   "Friends",
-//   "Activity",
-//   "Account",
-// ];
-
-// class Router {
-//   static Route<dynamic> generateRoute(RouteSettings settings) {
-//     switch (settings.name) {
-//       case friendsTabId:
-//         return MaterialPageRoute(builder: (context) => FriendsTab());
-//       case activityTabId:
-//         return MaterialPageRoute(builder: (context) => ActivityTab());
-//       case accountTabId:
-//         return MaterialPageRoute(builder: (context) => AccountTab());
-//       default:
-//         return MaterialPageRoute(
-//           builder: (context) => Scaffold(
-//             body: Center(
-//               child: Text('No route defined for ${settings.name}'),
-//             ),
-//           ),
-//         );
-//     }
-//   }
-// }
