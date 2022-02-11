@@ -39,7 +39,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
               Navigator.pop(context);
             },
             iconSize: 35,
-            icon: Icon(Icons.check),
+            icon: Icon(Icons.done),
           ),
         ],
       ),
@@ -74,7 +74,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                       elevation: _isSelected1 == false ? 3 : 10,
                       child: Center(
                         child: Text(
-                          "You paid, split equally",
+                          "You paid",
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 20,
@@ -88,8 +88,6 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                     print("selected 1");
                     _isSelected1 = true;
                     _isSelected2 = false;
-                    _isSelected3 = false;
-                    _isSelected4 = false;
                     setState(() {});
                   },
                 ),
@@ -123,7 +121,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                       elevation: _isSelected2 == false ? 3 : 10,
                       child: Center(
                         child: Text(
-                          "You are owed the full amount",
+                          "They paid",
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 20,
@@ -137,15 +135,13 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                     print("selected 2");
                     _isSelected2 = true;
                     _isSelected1 = false;
-                    _isSelected3 = false;
-                    _isSelected4 = false;
                     setState(() {});
                   },
                 ),
               ],
             ),
           ),
-          Container(
+          /*Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -242,7 +238,7 @@ class _ExpenseSplitState extends State<ExpenseSplit> {
                 ),
               ],
             ),
-          ),
+          ),*/
         ],
       ),
     );
