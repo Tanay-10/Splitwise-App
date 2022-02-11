@@ -78,14 +78,41 @@ class _FriendsTabState extends State<FriendsTab> {
                   ),
                   padding: EdgeInsets.fromLTRB(10, 15, 0, 8),
                 ),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
-                ExpenseTrack(),
+                ExpenseTrack(
+                  friendName: "ABC",
+                  amount: 1000,
+                  paidBy: "They paid",
+                ),
+                ExpenseTrack(
+                  friendName: "DEF",
+                  amount: 1000,
+                  paidBy: "I paid",
+                ),
+                ExpenseTrack(
+                  friendName: "ABC",
+                  amount: 1000,
+                  paidBy: "I paid",
+                ),
+                ExpenseTrack(
+                  friendName: "DEF",
+                  amount: 1000,
+                  paidBy: "They paid",
+                ),
+                ExpenseTrack(
+                  friendName: "ABC",
+                  amount: 1000,
+                  paidBy: "They paid",
+                ),
+                ExpenseTrack(
+                  friendName: "ABC",
+                  amount: 1000,
+                  paidBy: "They paid",
+                ),
+                ExpenseTrack(
+                  friendName: "ABC",
+                  amount: 1000,
+                  paidBy: "They paid",
+                ),
               ],
             ),
           ),
@@ -188,7 +215,14 @@ class NavBarItem extends StatelessWidget {
 }
 
 class ExpenseTrack extends StatelessWidget {
+  final String friendName;
+  final double amount;
+  final String paidBy;
+
   const ExpenseTrack({
+    required this.friendName,
+    required this.amount,
+    required this.paidBy,
     Key? key,
   }) : super(key: key);
 
@@ -203,7 +237,7 @@ class ExpenseTrack extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "ABC",
+              friendName,
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.w500,
@@ -214,7 +248,7 @@ class ExpenseTrack extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "owes you",
+                  paidBy == "They paid" ? "You owe" : "owes you",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -222,7 +256,7 @@ class ExpenseTrack extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "\u{20B9}1000.00",
+                  "\u{20B9}$amount",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -240,93 +274,6 @@ class ExpenseTrack extends StatelessWidget {
     );
   }
 }
-
-//
-// class FriendsTab extends StatefulWidget {
-//   const FriendsTab({Key? key}) : super(key: key);
-//
-//   @override
-//   _FriendsTabState createState() => _FriendsTabState();
-// }
-//
-// class _FriendsTabState extends State<FriendsTab> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       floatingActionButton: FloatingAction(),
-//       appBar: PreferredSize(
-//         preferredSize: Size.fromHeight(70),
-//         child: Container(
-//           padding: EdgeInsets.only(top: 20),
-//           // height: 80,
-//           child: AppBar(
-//             backgroundColor: Colors.white70,
-//             elevation: 2,
-//             actions: [
-//               IconButton(
-//                 splashRadius: 22,
-//                 splashColor: CupertinoColors.systemGrey,
-//                 color: Colors.black54,
-//                 iconSize: 30,
-//                 onPressed: () {},
-//                 icon: Icon(Icons.search),
-//               ),
-//               IconButton(
-//                 splashRadius: 22,
-//                 splashColor: CupertinoColors.systemGrey,
-//                 color: Colors.black54,
-//                 iconSize: 30,
-//                 onPressed: () {},
-//                 icon: Icon(Icons.person_add_alt),
-//               ),
-//               SizedBox(
-//                 width: 10,
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//       body: Center(child: Text("Friends")),
-//     );
-//   }
-// }
-
-// class ActivityTab extends StatefulWidget {
-//   const ActivityTab({Key? key}) : super(key: key);
-//
-//   @override
-//   _ActivityTabState createState() => _ActivityTabState();
-// }
-//
-// class _ActivityTabState extends State<ActivityTab> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       floatingActionButton: FloatingAction(),
-//       appBar: AppBar(
-//         backgroundColor: CupertinoColors.activeGreen,
-//       ),
-//       // body: _buildBody(),
-//     );
-//   }
-// }
-//
-// class AccountTab extends StatefulWidget {
-//   const AccountTab({Key? key}) : super(key: key);
-//
-//   @override
-//   _AccountTabState createState() => _AccountTabState();
-// }
-//
-// class _AccountTabState extends State<AccountTab> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       // body: _buildBody(),
-//     );
-//   }
-// }
 
 class FloatingAction extends StatelessWidget {
   const FloatingAction({Key? key}) : super(key: key);
@@ -361,7 +308,7 @@ class FloatingAction extends StatelessWidget {
             ),
             onPressed: () {
               print('clicked');
-              Navigator.pushNamed(context, routing.expenseScreenId);
+              Navigator.pushNamed(context, routing.addExpenseScreenId);
             },
             backgroundColor: CupertinoColors.activeGreen,
           ),
