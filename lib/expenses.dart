@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class FriendsList {
-  int friendsId;
+class Friends {
+  String friendsId;
   String name;
-  var contactNo;
+  int contactNo;
+  bool isSettled;
 
-  FriendsList({
+  Friends({
     required this.friendsId,
     required this.name,
     required this.contactNo,
+    required this.isSettled,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,23 +18,25 @@ class FriendsList {
       "friendsId": friendsId,
       "name": name,
       "contactNo": contactNo,
+      "isSettled": isSettled == true ? 1 : 0,
     };
     return (friendsListAsMap);
   }
 
-  static FriendsList fromMap(Map<String, dynamic> friendsListAsMap) {
-    FriendsList friendsList = FriendsList(
+  static Friends fromMap(Map<String, dynamic> friendsListAsMap) {
+    Friends friendsList = Friends(
       friendsId: friendsListAsMap["friendsId"],
       name: friendsListAsMap["name"],
       contactNo: friendsListAsMap["contactNo"],
+      isSettled: friendsListAsMap["isSettled"] == 0 ? false : true,
     );
     return friendsList;
   }
 }
 
 class TransactionList {
-  int transactionId;
-  int friendsId;
+  String transactionId;
+  String friendsId;
   String title;
   DateTime? date;
   double amount;
@@ -54,7 +58,7 @@ class TransactionList {
       "title": title,
       "date": date == null ? null : date!.millisecondsSinceEpoch,
       "amount": amount,
-      "iAmOwed": iAmOwed,
+      "iAmOwed": iAmOwed == true ? 1 : 0,
     };
   }
 
@@ -67,7 +71,7 @@ class TransactionList {
           ? null
           : DateTime.fromMicrosecondsSinceEpoch(transactionListAsMap["date"]),
       amount: transactionListAsMap["amount"],
-      iAmOwed: transactionListAsMap["iAmOwed"],
+      iAmOwed: transactionListAsMap["iAmOwed"] == 0 ? false : true,
     ));
   }
 }
