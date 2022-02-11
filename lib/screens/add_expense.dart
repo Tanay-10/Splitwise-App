@@ -255,21 +255,21 @@ class _AddExpenseState extends State<AddExpense> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           Container(
             height: 40,
-            width: MediaQuery.of(context).size.width * 3 / 5,
+            width: MediaQuery.of(context).size.width * 1 / 3,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
                 elevation: 10,
               ),
               child: Text(
-                "Paid by you and split equally",
+                "You paid",
                 style: TextStyle(
                   color: Colors.black54.withOpacity(0.7),
-                  fontSize: 16.5,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
               ),
