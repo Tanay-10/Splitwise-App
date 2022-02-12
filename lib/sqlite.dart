@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'expenses.dart';
@@ -21,18 +22,27 @@ class SqliteDb {
   }
 
   static Future _onCreate(Database db, int t) async {
-    await db.execute('CREATE TABLE $friendsTable(friendsId INTEGER PRIMARY KEY,'
-        'name TEXT,'
-        'contactNo INTEGER'
-        'isSettled INTEGER)');
+    await db
+        .execute('CREATE TABLE $friendsTable (friendsId INTEGER PRIMARY KEY,'
+            'name TEXT,'
+            'contactNo INTEGER'
+            'isSettled INTEGER)');
 
     await db.execute(
-        'CREATE TABLE $transactionTable(transactionId INTEGER PRIMARY KEY,'
+        'CREATE TABLE $transactionTable (transactionId INTEGER PRIMARY KEY,'
         'friendsId INTEGER,'
         'title TEXT,'
         'date INTEGER,'
         'amount DOUBLE,'
-        'iAmOwed INTEGER)');
+        'iAmOwed INTEGER,'
+        'FOREIGN KEY (friendsId) REFERENCES $friendsTable (friendsId) ON DELETE NO ACTION ON UPDATE NO ACTION )');
+
+    // await db.insert(friendsTable, {
+    //   "friendsId": defaultFriendId,
+    //   "name": defaultName,
+    //   "contactNo": defaultContactNo,
+    //   "isSettled": 1
+    // });
   }
 
   static initializeDb() async {
@@ -49,7 +59,7 @@ class SqliteDb {
     );
 
     _db = splitDb;
-    return _db;
+    return splitDb;
   }
 
   /// insert friend data into DB
@@ -57,9 +67,10 @@ class SqliteDb {
     var dbClient = await db;
     int id = await dbClient.insert(friendsTable, friendData);
     if (id != 0) {
+      print("data saved");
       return (id);
     } else {
-      return null;
+      return (null);
     }
   }
 
