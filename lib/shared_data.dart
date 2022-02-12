@@ -24,7 +24,7 @@ class ExpenseData extends ChangeNotifier {
     if (id == null) {
       print("could not insert");
     } else {
-      friends.friendsId = id.toString();
+      friends.friendsId = id;
       activeAccounts.add(friends);
       notifyListeners();
     }
