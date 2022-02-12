@@ -3,9 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:split_wise/navTabs/Friends.dart';
 import 'package:split_wise/routing.dart' as routing;
+import 'package:split_wise/expenses.dart';
+import 'package:split_wise/shared_data.dart';
 
-class SettleUp extends StatelessWidget {
-  const SettleUp({Key? key}) : super(key: key);
+class SettleUp extends StatefulWidget {
+  SettleUp({Key? key, this.friends}) : super(key: key);
+
+  final Friends? friends;
+
+  @override
+  _SettleUpState createState() => _SettleUpState();
+}
+
+class _SettleUpState extends State<SettleUp> {
+  Friends friends = Friends(
+    friendsId: defaultFriendId,
+    name: "",
+    contactNo: defaultContactNo,
+    isSettled: false,
+  );
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    friends = widget.friends ?? friends;
+  }
 
   @override
   Widget build(BuildContext context) {
