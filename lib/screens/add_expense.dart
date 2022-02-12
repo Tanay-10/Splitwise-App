@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:split_wise/expenses.dart';
 import 'package:split_wise/routing.dart' as routing;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:split_wise/shared_data.dart';
 
 class AddExpense extends StatefulWidget {
   const AddExpense({Key? key}) : super(key: key);
@@ -13,6 +16,41 @@ class AddExpense extends StatefulWidget {
 class _AddExpenseState extends State<AddExpense> {
   bool _isSelected1 = false;
   bool _isSelected2 = false;
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
+  Friends friends = Friends(
+    friendsId: defaultFriendId,
+    name: "",
+    contactNo: null,
+    isSettled: false,
+  );
+
+  TransactionList transaction = TransactionList(
+    transactionId: defaultTransactionId,
+    friendsId: defaultFriendId,
+    title: "",
+    date: null,
+    amount: defaultAmount,
+    iAmOwed: false,
+  );
+
+  void saveNewFriend() async {
+    Provider.of<ExpenseData>(context, listen: false).addFriend(friends);
+    Navigator.pop(context);
+  }
+
+  void updateNewFriend() async {
+    Provider.of<ExpenseData>(context, listen: false).updateFriend(friends);
+    Navigator.pop(context);
+  }
+
+  void deleteNewFriend() async {
+    Provider.of<ExpenseData>(context, listen: false).deleteFriend(friends);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +74,8 @@ class _AddExpenseState extends State<AddExpense> {
             color: CupertinoColors.activeGreen,
             splashRadius: 20,
             onPressed: () {
-              Navigator.pop(context);
+              saveNewFriend();
+              // Navigator.pop(context);
             },
             iconSize: 35,
             icon: Icon(Icons.check),
@@ -73,14 +112,48 @@ class _AddExpenseState extends State<AddExpense> {
                     height: 45,
                     child: Card(
                       child: Center(
-                        child: Text(
-                          "ABC",
+                        child: TextField(
                           textAlign: TextAlign.center,
+                          autofocus: false,
                           style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.black54.withOpacity(0.8),
-                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: Colors.black87,
                           ),
+                          controller: nameController,
+                          onChanged: (String? value) {
+                            friends.name = value == null ? friends.name : value;
+                          },
+                          cursorColor: CupertinoColors.activeGreen,
+                          cursorHeight: 30,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              borderSide: BorderSide(
+                                color: CupertinoColors.activeGreen,
+                                width: 2,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              borderSide: BorderSide(
+                                color: CupertinoColors.activeGreen,
+                                width: 2,
+                              ),
+                            ),
+                            focusColor: CupertinoColors.activeGreen,
+                            contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                            isDense: true,
+                            hintText: "Name",
+                            hintStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black87.withOpacity(0.7),
+                            ),
+                          ),
+                          onTap: () {},
                         ),
                       ),
                       elevation: 4,
@@ -134,6 +207,11 @@ class _AddExpenseState extends State<AddExpense> {
                       fontSize: 20,
                       color: Colors.black87,
                     ),
+                    controller: titleController,
+                    onChanged: (String? value) {
+                      transaction.title =
+                          value == null ? transaction.title : value;
+                    },
                     cursorColor: CupertinoColors.activeGreen,
                     cursorHeight: 30,
                     decoration: InputDecoration(
@@ -215,6 +293,12 @@ class _AddExpenseState extends State<AddExpense> {
                     autofocus: false,
                     cursorColor: CupertinoColors.activeGreen,
                     cursorHeight: 30,
+                    controller: amountController,
+                    onChanged: (String? value) {
+                      transaction.amount = value == null
+                          ? transaction.amount
+                          : double.parse(value);
+                    },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 5),
                       isDense: true,
