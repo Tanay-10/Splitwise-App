@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
+const int defaultFriendId = 1;
+const String defaultName = "";
+const int defaultContactNo = 0;
+
+const int defaultTransactionId = 1;
+const double defaultAmount = 0.00;
+
 class Friends {
-  String friendsId;
+  int friendsId;
   String name;
-  int contactNo;
+  int? contactNo;
   bool isSettled;
 
   Friends({
@@ -35,8 +42,8 @@ class Friends {
 }
 
 class TransactionList {
-  String transactionId;
-  String friendsId;
+  int transactionId;
+  int friendsId;
   String title;
   DateTime? date;
   double amount;
