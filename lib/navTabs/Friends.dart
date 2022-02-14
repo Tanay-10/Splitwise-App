@@ -34,7 +34,8 @@ class _FriendsTabState extends State<FriendsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AccountData, TransactionData>(builder: (context, accountData, transactionData, x) {
+    return Consumer2<AccountData, TransactionData>(
+        builder: (context, accountData, transactionData, x) {
       return Scaffold(
         body: PageView(
           controller: pageController,
@@ -119,13 +120,18 @@ class _FriendsTabState extends State<FriendsTab> {
               //     ),
               //   ],
               // ),
-              body: () {
+              body: Builder(builder: (BuildContext newContext) {
                 if (accountData.isDataLoaded) {
                   var data = accountData.activeAccounts;
+                  var t_data = transactionData.transactionList;
                   List<Widget> children = [];
                   for (var account in data) {
-                    children.add(ExpenseTrack(
-                        friendName: account.name, amount: transactionData., paidBy: "I paid"));
+                    for (var payment in t_data) {
+                      children.add(ExpenseTrack(
+                          friendName: account.name,
+                          amount: payment.amount,
+                          paidBy: "I paid"));
+                    }
                   }
                   return ListView(
                     children: children,
@@ -138,7 +144,7 @@ class _FriendsTabState extends State<FriendsTab> {
                     ),
                   );
                 }
-              }(),
+              }),
             ),
             Activity(),
             Accounts(),
