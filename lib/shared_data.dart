@@ -87,4 +87,17 @@ class TransactionData extends ChangeNotifier {
     }
     return index;
   }
+
+  void addTransaction(Transactions transactions) async {
+    var transactionAsMap = transactions.toMap();
+    transactionAsMap.remove("transactionId");
+    int? id = await SqliteDb.insertTransaction(transactionAsMap);
+    if (id == null) {
+      print("could not insert");
+    } else {
+      transactions.transactionId = id;
+      transactionList.add(transactions);
+      notifyListeners();
+    }
+  }
 }
