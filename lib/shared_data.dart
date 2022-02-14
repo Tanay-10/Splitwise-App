@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:split_wise/sqlite.dart';
 import 'expenses.dart';
 
-class ExpenseData extends ChangeNotifier {
+class AccountData extends ChangeNotifier {
   bool isDataLoaded = false;
   List<Friends> activeAccounts = [];
+  List<Friends> friendsList = [];
 
   int? findFriendIndex(Friends friends) {
     var index = activeAccounts.indexWhere((Friends f) {
@@ -25,7 +26,7 @@ class ExpenseData extends ChangeNotifier {
       print("could not insert");
     } else {
       friends.friendsId = id;
-      activeAccounts.add(friends);
+      friendsList.add(friends);
       notifyListeners();
     }
   }
@@ -71,5 +72,19 @@ class ExpenseData extends ChangeNotifier {
       activeAccounts.removeAt(index);
       notifyListeners();
     }
+  }
+}
+
+class TransactionData extends ChangeNotifier {
+  List<Transactions> transactionList = [];
+
+  int? findTransactionIndex(Transactions transactions) {
+    var index = transactionList.indexWhere((Transactions t) {
+      return t.transactionId == transactions.transactionId;
+    });
+    if (index == -1) {
+      return null;
+    }
+    return index;
   }
 }
