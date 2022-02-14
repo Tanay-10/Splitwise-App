@@ -28,7 +28,7 @@ class _AddExpenseState extends State<AddExpense> {
     isSettled: false,
   );
 
-  TransactionList transaction = TransactionList(
+  Transactions transaction = Transactions(
     transactionId: defaultTransactionId,
     friendsId: defaultFriendId,
     title: "",
@@ -38,17 +38,17 @@ class _AddExpenseState extends State<AddExpense> {
   );
 
   void saveNewFriend() async {
-    Provider.of<ExpenseData>(context, listen: false).addFriend(friends);
+    Provider.of<AccountData>(context, listen: false).addFriend(friends);
     Navigator.pop(context);
   }
 
   void updateNewFriend() async {
-    Provider.of<ExpenseData>(context, listen: false).updateFriend(friends);
+    Provider.of<AccountData>(context, listen: false).updateFriend(friends);
     Navigator.pop(context);
   }
 
   void deleteNewFriend() async {
-    Provider.of<ExpenseData>(context, listen: false).deleteFriend(friends);
+    Provider.of<AccountData>(context, listen: false).deleteFriend(friends);
     Navigator.pop(context);
   }
 
