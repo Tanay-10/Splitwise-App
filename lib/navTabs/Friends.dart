@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:split_wise/shared_data.dart';
+import 'package:split_wise/expenses.dart';
 import '../routing.dart' as routing;
 import 'Account.dart';
 import 'Activity.dart';
@@ -31,139 +34,161 @@ class _FriendsTabState extends State<FriendsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: pageController,
-        children: [
-          Scaffold(
-            floatingActionButton: FloatingAction(),
-            appBar: AppBar(
-              backgroundColor: Colors.white70,
-              elevation: 2,
-              actions: [
-                IconButton(
-                  splashRadius: 22,
-                  splashColor: CupertinoColors.systemGrey,
-                  color: Colors.black54,
-                  iconSize: 30,
-                  onPressed: () {},
-                  icon: Icon(Icons.search),
-                ),
-                IconButton(
-                  splashRadius: 22,
-                  splashColor: CupertinoColors.systemGrey,
-                  color: Colors.black54,
-                  iconSize: 30,
-                  icon: Icon(Icons.person_add_alt),
-                  onPressed: () {
-                    Navigator.pushNamed(context, routing.newContactId);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                )
-              ],
-            ),
-            body: ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Text(
-                    "Overall, you are owed  Rs.",
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
+    return Consumer2<AccountData, TransactionData>(builder: (context, accountData, transactionData, x) {
+      return Scaffold(
+        body: PageView(
+          controller: pageController,
+          children: [
+            Scaffold(
+              floatingActionButton: FloatingAction(),
+              appBar: AppBar(
+                backgroundColor: Colors.white70,
+                elevation: 2,
+                actions: [
+                  IconButton(
+                    splashRadius: 22,
+                    splashColor: CupertinoColors.systemGrey,
+                    color: Colors.black54,
+                    iconSize: 30,
+                    onPressed: () {},
+                    icon: Icon(Icons.search),
                   ),
-                  padding: EdgeInsets.fromLTRB(10, 15, 0, 8),
-                ),
-                ExpenseTrack(
-                  friendName: "ABC",
-                  amount: 1000,
-                  paidBy: "They paid",
-                ),
-                ExpenseTrack(
-                  friendName: "DEF",
-                  amount: 1000,
-                  paidBy: "I paid",
-                ),
-                ExpenseTrack(
-                  friendName: "ABC",
-                  amount: 1000,
-                  paidBy: "I paid",
-                ),
-                ExpenseTrack(
-                  friendName: "DEF",
-                  amount: 1000,
-                  paidBy: "They paid",
-                ),
-                ExpenseTrack(
-                  friendName: "ABC",
-                  amount: 1000,
-                  paidBy: "They paid",
-                ),
-                ExpenseTrack(
-                  friendName: "ABC",
-                  amount: 1000,
-                  paidBy: "They paid",
-                ),
-                ExpenseTrack(
-                  friendName: "ABC",
-                  amount: 1000,
-                  paidBy: "They paid",
-                ),
-              ],
+                  IconButton(
+                    splashRadius: 22,
+                    splashColor: CupertinoColors.systemGrey,
+                    color: Colors.black54,
+                    iconSize: 30,
+                    icon: Icon(Icons.person_add_alt),
+                    onPressed: () {
+                      Navigator.pushNamed(context, routing.newContactId);
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  )
+                ],
+              ),
+              // body: ListView(
+              //   // crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Container(
+              //       child: Text(
+              //         "Overall, you are owed  Rs.",
+              //         style: TextStyle(
+              //           color: Colors.black87,
+              //           fontSize: 17,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //       padding: EdgeInsets.fromLTRB(10, 15, 0, 8),
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "ABC",
+              //       amount: 1000,
+              //       paidBy: "They paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "DEF",
+              //       amount: 1000,
+              //       paidBy: "I paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "ABC",
+              //       amount: 1000,
+              //       paidBy: "I paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "DEF",
+              //       amount: 1000,
+              //       paidBy: "They paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "ABC",
+              //       amount: 1000,
+              //       paidBy: "They paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "ABC",
+              //       amount: 1000,
+              //       paidBy: "They paid",
+              //     ),
+              //     ExpenseTrack(
+              //       friendName: "ABC",
+              //       amount: 1000,
+              //       paidBy: "They paid",
+              //     ),
+              //   ],
+              // ),
+              body: () {
+                if (accountData.isDataLoaded) {
+                  var data = accountData.activeAccounts;
+                  List<Widget> children = [];
+                  for (var account in data) {
+                    children.add(ExpenseTrack(
+                        friendName: account.name, amount: transactionData., paidBy: "I paid"));
+                  }
+                  return ListView(
+                    children: children,
+                    padding: const EdgeInsets.all(5),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: CupertinoColors.activeGreen,
+                    ),
+                  );
+                }
+              }(),
             ),
-          ),
-          Activity(),
-          Accounts(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        // items: CupertinoTabBar(
-        currentIndex: _selectedIndex,
-        elevation: 5,
-        type: BottomNavigationBarType.shifting,
-        selectedItemColor: CupertinoColors.activeGreen,
-        unselectedItemColor: CupertinoColors.inactiveGray,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        selectedIconTheme: const IconThemeData(
-          size: 33,
+            Activity(),
+            Accounts(),
+          ],
         ),
-        unselectedIconTheme: const IconThemeData(
-          size: 28,
+        bottomNavigationBar: BottomNavigationBar(
+          // items: CupertinoTabBar(
+          currentIndex: _selectedIndex,
+          elevation: 5,
+          type: BottomNavigationBarType.shifting,
+          selectedItemColor: CupertinoColors.activeGreen,
+          unselectedItemColor: CupertinoColors.inactiveGray,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          selectedIconTheme: const IconThemeData(
+            size: 33,
+          ),
+          unselectedIconTheme: const IconThemeData(
+            size: 28,
+          ),
+          onTap: selectTab,
+          items: /*const <BottomNavigationBarItem>*/ [
+            BottomNavigationBarItem(
+              activeIcon: NavBarItem(
+                itemText: "Friends",
+                activeIcon: CupertinoIcons.person,
+              ),
+              icon: Icon(CupertinoIcons.person),
+              label: "Friends",
+            ),
+            BottomNavigationBarItem(
+              activeIcon: NavBarItem(
+                itemText: "Activity",
+                activeIcon: CupertinoIcons.book,
+              ),
+              icon: Icon(CupertinoIcons.book),
+              label: "Activity",
+            ),
+            BottomNavigationBarItem(
+              activeIcon: NavBarItem(
+                itemText: "Activity",
+                activeIcon: CupertinoIcons.money_dollar,
+              ),
+              icon: Icon(CupertinoIcons.money_dollar),
+              label: "Account",
+            ),
+          ],
         ),
-        onTap: selectTab,
-        items: /*const <BottomNavigationBarItem>*/ [
-          BottomNavigationBarItem(
-            activeIcon: NavBarItem(
-              itemText: "Friends",
-              activeIcon: CupertinoIcons.person,
-            ),
-            icon: Icon(CupertinoIcons.person),
-            label: "Friends",
-          ),
-          BottomNavigationBarItem(
-            activeIcon: NavBarItem(
-              itemText: "Activity",
-              activeIcon: CupertinoIcons.book,
-            ),
-            icon: Icon(CupertinoIcons.book),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            activeIcon: NavBarItem(
-              itemText: "Activity",
-              activeIcon: CupertinoIcons.money_dollar,
-            ),
-            icon: Icon(CupertinoIcons.money_dollar),
-            label: "Account",
-          ),
-        ],
-      ),
-    );
+      );
+    });
   }
 }
 
