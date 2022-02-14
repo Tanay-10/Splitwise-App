@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const int defaultFriendId = 1;
 const String defaultName = "";
 const int defaultContactNo = 0;
+const int defaultValue = 1;
 
 const int defaultTransactionId = 1;
 const double defaultAmount = 0.00;
@@ -41,7 +42,7 @@ class Friends {
   }
 }
 
-class TransactionList {
+class Transactions {
   int transactionId;
   int friendsId;
   String title;
@@ -49,7 +50,7 @@ class TransactionList {
   double amount;
   bool iAmOwed;
 
-  TransactionList({
+  Transactions({
     required this.transactionId,
     required this.friendsId,
     required this.title,
@@ -69,8 +70,8 @@ class TransactionList {
     };
   }
 
-  static TransactionList fromMap(Map<String, dynamic> transactionListAsMap) {
-    return (TransactionList(
+  static Transactions fromMap(Map<String, dynamic> transactionListAsMap) {
+    return (Transactions(
       transactionId: transactionListAsMap["transactionId"],
       friendsId: transactionListAsMap["friendsId"],
       title: transactionListAsMap["title"],
