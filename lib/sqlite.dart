@@ -101,4 +101,40 @@ class SqliteDb {
     );
     return (changes == 1);
   }
+
+  static Future<List<Friends>> getAllActiveAccounts() async {
+    var dbClient = await db;
+    List<Map<String, dynamic>> accountsFromDb = await dbClient.query(
+      transactionTable,
+      where: "isSettled = ?",
+      whereArgs: [0],
+    );
+    List<Friends> friendsAsObjects = [];
+    for (var map in accountsFromDb) {
+      print(map);
+      friendsAsObjects.add(Friends.fromMap(map));
+    }
+    return (friendsAsObjects);
+  }
+
+  static Future<int?> insertTransaction(
+      Map<String, dynamic> transactionData) async {
+    var dbClient = await db;
+    int id = await dbClient.insert(transactionTable, transactionData);
+    if (id != 0) {
+      return (id);
+    } else {
+      return (null);
+    }
+  }
+
+  static Future<bool> deleteTransaction(Transactions transactions) async {
+    var dbClient = await db;
+    int changes = await dbClient.delete(
+      transactionTable,
+      where: "transactionId = ?",
+      whereArgs: [transactions.transactionId],
+    );
+    return (changes == 1);
+  }
 }
