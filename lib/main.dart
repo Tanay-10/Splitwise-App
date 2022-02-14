@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ExpenseData(),
+      create: (context) => AccountData(),
       child: MaterialApp(
         theme: ThemeData.light(),
         initialRoute: routing.friendsTabId,
