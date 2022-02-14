@@ -28,8 +28,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AccountData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AccountData()),
+        ChangeNotifierProvider(create: (context) => TransactionData()),
+      ],
       child: MaterialApp(
         theme: ThemeData.light(),
         initialRoute: routing.friendsTabId,
