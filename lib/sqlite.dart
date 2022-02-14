@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 import 'expenses.dart';
 
@@ -22,44 +22,48 @@ class SqliteDb {
   }
 
   static Future _onCreate(Database db, int t) async {
-    await db
-        .execute('CREATE TABLE $friendsTable (friendsId INTEGER PRIMARY KEY,'
-            'name TEXT,'
-            'contactNo INTEGER'
-            'isSettled INTEGER)');
+    await db.execute(
+        'CREATE TABLE FRIENDS (friendsId INTEGER PRIMARY KEY AUTOINCREMENT, '
+        'name TEXT, '
+        'contactNo INTEGER,'
+        'isSettled INTEGER)');
 
     await db.execute(
-        'CREATE TABLE $transactionTable (transactionId INTEGER PRIMARY KEY,'
+        'CREATE TABLE TRANSACTIONS (transactionId INTEGER PRIMARY KEY AUTOINCREMENT,'
         'friendsId INTEGER,'
         'title TEXT,'
         'date INTEGER,'
-        'amount DOUBLE,'
+        'amount REAL,'
         'iAmOwed INTEGER,'
-        'FOREIGN KEY (friendsId) REFERENCES $friendsTable (friendsId) ON DELETE NO ACTION ON UPDATE NO ACTION )');
+        'FOREIGN KEY (friendsId) REFERENCES FRIENDS (friendsId) ON DELETE NO ACTION ON UPDATE NO ACTION )');
 
-    // await db.insert(friendsTable, {
-    //   "friendsId": defaultFriendId,
-    //   "name": defaultName,
-    //   "contactNo": defaultContactNo,
-    //   "isSettled": 1
-    // });
+    await db.insert(friendsTable, {
+      "friendsId": defaultFriendId,
+      "name": defaultName,
+      "contactNo": defaultContactNo,
+      "isSettled": defaultValue,
+    });
   }
 
   static initializeDb() async {
-    String folderPath = await getDatabasesPath();
-    String path = join(folderPath, "splitwise.db");
+    try {
+      String folderPath = await getDatabasesPath();
+      String path = p.join(folderPath, "splitwise.db");
 
-    /// for deleting database
-    // await deleteDatabase(path);
-    var splitDb = await openDatabase(
-      path,
-      version: 3,
-      onConfigure: _onConfigure,
-      onCreate: _onCreate,
-    );
+      /// for deleting database
+      // await deleteDatabase(path);
+      var splitDb = await openDatabase(
+        path,
+        version: 2,
+        onConfigure: _onConfigure,
+        onCreate: _onCreate,
+      );
 
-    _db = splitDb;
-    return splitDb;
+      _db = splitDb;
+      return splitDb;
+    } catch (ex) {
+      print(ex);
+    }
   }
 
   /// insert friend data into DB
